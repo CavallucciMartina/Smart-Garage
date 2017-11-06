@@ -1,0 +1,26 @@
+#ifndef __GATE_TASK__
+#define __GATE_TASK__
+
+#include "Task.h"
+#include "Led.h"
+#include "PassiveInfraRed.h"
+
+class GateTask: public Task {
+	
+	int pinLR;
+	int pinLDIST1;
+	int pinLDIST2;
+	int pinPIR;
+	Light* LR;
+	Light* LDIST1;
+	Light* LDIST2;
+	Presence* PIR;
+	enum {WAITING, OPENING, CLOSING, CAR} state;
+	
+	public:
+	GateTask(int pinLR, int pinLDIST1, int pinLDIST2, int pinPIR);
+	void init();
+	void tick();
+};
+
+#endif
