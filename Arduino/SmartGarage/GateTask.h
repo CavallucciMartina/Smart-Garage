@@ -1,15 +1,16 @@
 #ifndef __GATE_TASK__
 #define __GATE_TASK__
 
-#define TIMEOUT 1000000000
+#define TIMEOUT 10000
 
 #include "Task.h"
 #include "LedLazy.h"
 #include "Led.h"
 #include "PassiveInfraRed.h"
+#include "WString.h"
 
 class GateTask: public Task {
-
+ 
   long initialTime;
 	int pinLR;
 	int pinLDIST1;

@@ -13,5 +13,5 @@ PassiveInfraRed::PassiveInfraRed(int pin){
 }
 
 bool PassiveInfraRed::isPresent(){
-	return digitalRead(pin) == HIGH;
+  return  digitalRead(pin) == HIGH;
 }

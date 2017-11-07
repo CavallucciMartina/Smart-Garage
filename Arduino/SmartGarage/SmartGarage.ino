@@ -2,12 +2,12 @@
 #include "gateTask.h"
 
 Timer timer;
-GateTask gateTask(10,12,11,2);
+GateTask gateTask(6,3,4,5);
 
 void setup() {
   Serial.begin(9600);
   gateTask.init();
-  timer.setupPeriod(500);
+  timer.setupPeriod(5000);
 }
 
 void loop() {

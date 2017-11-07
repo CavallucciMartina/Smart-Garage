@@ -25,37 +25,47 @@ void GateTask::init() {
 
 void GateTask::tick() {
 	switch (state) {
+    
 		case WAITING:
-       if (Serial.available() && Serial.readString() == "APRI" && !openingRequest) {
+       Serial.println("WAITING");
+       if (Serial.available() && String("APRI").equals(Serial.readString()) && !openingRequest) {
           openingRequest = true;
           state = OPENING;
+          Serial.println("NON DEVO ESSERE QUI");
        }
-       Serial.println(state);
+       break;
+       
 		case OPENING:
+       Serial.println("OPENING");
        initialTime = millis();
        LR->switchOn();
        while (millis() - initialTime < TIMEOUT && !autoReady) {
           if (PIR->isPresent()){
               autoReady = true;
               state = CAR;
+              Serial.println("CAR");
           }
        }
        if (millis() - initialTime > TIMEOUT || !autoReady) {
           state = CLOSING;
        }
-       Serial.println(state);
+       break;
+       
 		case CLOSING:
+       Serial.println("CLOSING");
        autoReady = false;
        openingRequest = false;
        parked = false;
        LR->switchOff();
        state = WAITING;
-       Serial.println(state);
+       break;
+       
 		case CAR:
-       if (parked) {
-          delay(5000);
+		   Serial.println("CAR");
+       //if (parked) {
+       delay(5000);
           //state = CLOSING;
-       }
-       Serial.println(state);
+       //}
+       break;
 	  }
 }
