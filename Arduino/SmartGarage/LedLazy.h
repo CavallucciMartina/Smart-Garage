@@ -1,5 +1,5 @@
-#ifndef __LED__
-#define __LED__
+#ifndef __LED_LAZY__
+#define __LED_LAZY__
 
 #include "Light.h"
 
