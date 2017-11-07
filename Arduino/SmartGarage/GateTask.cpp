@@ -1,11 +1,9 @@
-#include "gateTask.h"
+#include "GateTask.h"
 #include "Arduino.h"
 #include "GlobalVar.h"
 
-GateTask::GateTask(int pinLR, int pinLDIST1, int pinLDIST2, int pinPIR) {
+GateTask::GateTask(int pinLR, int pinPIR) {
 	this->pinLR = pinLR;
-	this->pinLDIST1 = pinLDIST1;
-	this->pinLDIST2 = pinLDIST2;
 	this->pinPIR = pinPIR;
   openingRequest = false;
   autoReady = false;
@@ -15,10 +13,6 @@ GateTask::GateTask(int pinLR, int pinLDIST1, int pinLDIST2, int pinPIR) {
 void GateTask::init() {
 	LR = new LedLazy(pinLR);
 	LR->switchOff();
-	LDIST1 = new Led(pinLDIST1);
-	LDIST1->switchOff();
-	LDIST2 = new Led(pinLDIST2);
-	LDIST2->switchOff();
 	PIR = new PassiveInfraRed(pinPIR);
   state = WAITING;
 }
@@ -31,7 +25,6 @@ void GateTask::tick() {
        if (Serial.available() && String("APRI").equals(Serial.readString()) && !openingRequest) {
           openingRequest = true;
           state = OPENING;
-          Serial.println("NON DEVO ESSERE QUI");
        }
        break;
        
@@ -62,10 +55,9 @@ void GateTask::tick() {
        
 		case CAR:
 		   Serial.println("CAR");
-       //if (parked) {
-       delay(5000);
-          //state = CLOSING;
-       //}
+       if (parked) {
+          state = CLOSING;
+       }
        break;
 	  }
 }
