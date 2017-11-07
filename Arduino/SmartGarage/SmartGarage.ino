@@ -1,16 +1,13 @@
 #include "Timer.h"
 #include "gateTask.h"
-#include "GlobalVar.h"
 
 Timer timer;
-GateTask gateTask(5,3,4,6);
+GateTask gateTask(10,12,11,2);
 
 void setup() {
+  Serial.begin(9600);
   gateTask.init();
   timer.setupPeriod(500);
-  openinigRequest = false;
-  autoReady = false;
-  parked = false;
 }
 
 void loop() {

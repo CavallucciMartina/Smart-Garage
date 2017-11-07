@@ -1,7 +1,7 @@
 #ifndef __GATE_TASK__
 #define __GATE_TASK__
 
-#define TIMEOUT 1000000
+#define TIMEOUT 1000000000
 
 #include "Task.h"
 #include "LedLazy.h"

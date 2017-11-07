@@ -1,12 +1,15 @@
 #include "gateTask.h"
 #include "Arduino.h"
-#include "GlobalVar"
+#include "GlobalVar.h"
 
 GateTask::GateTask(int pinLR, int pinLDIST1, int pinLDIST2, int pinPIR) {
 	this->pinLR = pinLR;
 	this->pinLDIST1 = pinLDIST1;
 	this->pinLDIST2 = pinLDIST2;
 	this->pinPIR = pinPIR;
+  openingRequest = false;
+  autoReady = false;
+  parked = false;
 }
 
 void GateTask::init() {
@@ -23,10 +26,11 @@ void GateTask::init() {
 void GateTask::tick() {
 	switch (state) {
 		case WAITING:
-       if (Serial.available() && Serial.read() == "APRI" && !openingRequest) {
+       if (Serial.available() && Serial.readString() == "APRI" && !openingRequest) {
           openingRequest = true;
           state = OPENING;
        }
+       Serial.println(state);
 		case OPENING:
        initialTime = millis();
        LR->switchOn();
@@ -36,17 +40,22 @@ void GateTask::tick() {
               state = CAR;
           }
        }
-       state = CLOSING;
+       if (millis() - initialTime > TIMEOUT || !autoReady) {
+          state = CLOSING;
+       }
+       Serial.println(state);
 		case CLOSING:
        autoReady = false;
        openingRequest = false;
-       parcked = false;
+       parked = false;
        LR->switchOff();
        state = WAITING;
-       
+       Serial.println(state);
 		case CAR:
        if (parked) {
-          state = CLOSING;
+          delay(5000);
+          //state = CLOSING;
        }
+       Serial.println(state);
 	  }
 }
