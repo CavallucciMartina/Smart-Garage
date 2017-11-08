@@ -31,6 +31,9 @@ void SupportTask::tick() {
        break;
        
     case ENTERING:
+       if (!openingRequest || !autoReady || parked) {
+          state = WAITING;
+       }
        Serial.print("DISTANCE: ");
        Serial.println(PROX->getDistance());
        if (PROX->getDistance()<=DISTMAX) {
@@ -40,7 +43,7 @@ void SupportTask::tick() {
        break;
        
     case MIDDLE:
-       if (parked) {
+       if (!openingRequest || !autoReady || parked) {
           LDIST1->switchOff();
           state = WAITING;
        }
@@ -57,7 +60,7 @@ void SupportTask::tick() {
        break;
        
     case END:
-        if (parked) {
+        if (!openingRequest || !autoReady || parked) {
           LDIST1->switchOff();
           LDIST2->switchOff();
           state = WAITING;
@@ -73,7 +76,7 @@ void SupportTask::tick() {
        break;
 
      case TOUCHING:
-        if (parked) {
+        if (!openingRequest || !autoReady || parked) {
           LDIST1->switchOff();
           LDIST2->switchOff();
           state = WAITING;

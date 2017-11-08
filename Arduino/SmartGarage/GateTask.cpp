@@ -34,7 +34,6 @@ void GateTask::tick() {
           if (PIR->isPresent()){
               autoReady = true;
               state = CAR;
-              Serial.println("CAR");
           }
        }
        if (millis() - initialTime > TIMEOUT || !autoReady) {

@@ -2,6 +2,7 @@
 #include "GateTask.h"
 #include "SupportTask.h"
 #include "CloseTask.h"
+#include "ForcedCloseTask.h"
 
 volatile bool openingRequest;
 volatile bool autoReady;
@@ -10,13 +11,15 @@ Timer timer;
 GateTask gateTask(6, 5);
 SupportTask supportTask(3, 4, 8, 9, 7);
 CloseTask closeTask(8, 9);
+ForcedCloseTask forcedCloseTask(8, 9, 10);
 
 void setup() {
   Serial.begin(9600);
   gateTask.init();
   supportTask.init();
   closeTask.init();
-  timer.setupPeriod(200);
+  forcedCloseTask.init();
+  timer.setupPeriod(150);
 }
 
 void loop() {
@@ -24,5 +27,5 @@ void loop() {
   gateTask.tick();
   supportTask.tick();
   closeTask.tick();
-  supportTask.tick();
+  forcedCloseTask.tick();
 }
