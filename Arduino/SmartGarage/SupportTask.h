@@ -1,10 +1,6 @@
 #ifndef __SUPPORT_TASK__
 #define __SUPPORT_TASK__
 
-#define DISTMIN 0.1
-#define DISTMAX 1
-#define DISTCLOSE 0.5
-
 #include "Task.h"
 #include "Led.h"
 #include "Sonar.h"

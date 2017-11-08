@@ -21,15 +21,13 @@ void GateTask::tick() {
 	switch (state) {
     
 		case WAITING:
-       Serial.println("WAITING");
-       if (Serial.available() && String("APRI").equals(Serial.readString()) && !openingRequest) {
+       if (Serial.available() && String("OPEN").equals(Serial.readString()) && !openingRequest) {
           openingRequest = true;
           state = OPENING;
        }
        break;
        
 		case OPENING:
-       Serial.println("OPENING");
        initialTime = millis();
        LR->switchOn();
        while (millis() - initialTime < TIMEOUT && !autoReady) {
@@ -45,7 +43,6 @@ void GateTask::tick() {
        break;
        
 		case CLOSING:
-       Serial.println("CLOSING");
        autoReady = false;
        openingRequest = false;
        parked = false;
@@ -54,7 +51,6 @@ void GateTask::tick() {
        break;
        
 		case CAR:
-		   Serial.println("CAR");
        if (parked) {
           state = CLOSING;
        }

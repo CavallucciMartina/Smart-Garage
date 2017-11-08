@@ -24,7 +24,6 @@ void SupportTask::tick() {
   switch (state) {
     
     case WAITING:
-       Serial.println("WAITING");
        if (openingRequest && autoReady && !parked) {
           Serial.println("Welcome Home.");
           state = ENTERING;
@@ -32,7 +31,7 @@ void SupportTask::tick() {
        break;
        
     case ENTERING:
-       Serial.print("ENTERING: ");
+       Serial.print("DISTANCE: ");
        Serial.println(PROX->getDistance());
        if (PROX->getDistance()<=DISTMAX) {
         LDIST1->switchOn();
@@ -41,7 +40,11 @@ void SupportTask::tick() {
        break;
        
     case MIDDLE:
-       Serial.print("MIDDLE: ");
+       if (parked) {
+          LDIST1->switchOff();
+          state = WAITING;
+       }
+       Serial.print("DISTANCE: ");
        Serial.println(PROX->getDistance());
        if (PROX->getDistance()<=DISTMIN) {
         LDIST2->switchOn();
@@ -51,13 +54,14 @@ void SupportTask::tick() {
         LDIST1->switchOff();
         state = ENTERING;
        }
-       if (parked) {
-        LDIST1->switchOff();
-        state = WAITING;
-       }
        break;
        
     case END:
+        if (parked) {
+          LDIST1->switchOff();
+          LDIST2->switchOff();
+          state = WAITING;
+       }
        Serial.println("OK CAN STOP");
        if (TOUCH->isPressed()) {
           state = TOUCHING;
@@ -66,22 +70,17 @@ void SupportTask::tick() {
         LDIST2->switchOff();
         state = MIDDLE;
        }
-       if (parked) {
-        LDIST1->switchOff();
-        LDIST2->switchOff();
-        state = WAITING;
-       }
        break;
 
      case TOUCHING:
+        if (parked) {
+          LDIST1->switchOff();
+          LDIST2->switchOff();
+          state = WAITING;
+       }
        Serial.println("TOUCHING");
        if (!(TOUCH->isPressed())) {
           state = END;
-       }
-       if (parked) {
-        LDIST1->switchOff();
-        LDIST2->switchOff();
-        state = WAITING;
        }
        break;
     }
