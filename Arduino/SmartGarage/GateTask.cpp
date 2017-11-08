@@ -28,8 +28,8 @@ void GateTask::tick() {
        break;
        
 		case OPENING:
-       initialTime = millis();
        LR->switchOn();
+       initialTime = millis();
        while (millis() - initialTime < TIMEOUT && !autoReady) {
           if (PIR->isPresent()){
               autoReady = true;
