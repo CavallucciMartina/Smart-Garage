@@ -1,3 +1,7 @@
+/*
+  This task force the garage to close if the user pushes the CLOSE button. Only if the car is too near to the door it will not work.
+*/
+
 #ifndef __FORCED_CLOSE_TASK__
 #define __FORCED_CLOSE_TASK__
 

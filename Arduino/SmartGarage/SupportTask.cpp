@@ -26,7 +26,7 @@ void SupportTask::tick() {
     case WAITING:
        if (openingRequest && autoReady && !parked) {
           Serial.println("Welcome Home.");
-          delay(500);
+          delay(PRINT_DELAY);
           state = ENTERING;
        }
        break;
@@ -35,12 +35,14 @@ void SupportTask::tick() {
        if (!openingRequest || !autoReady || parked) {
           state = WAITING;
        }
-       Serial.println("DISTANCE: " + (String)PROX->getDistance());
+       else {
+          Serial.println("DISTANCE: " + (String)PROX->getDistance());
+          delay(PRINT_DELAY);
+       }
        if (PROX->getDistance()<=DISTMAX) {
         LDIST1->switchOn();
         state = MIDDLE;
        }
-       delay(500);
        break;
        
     case MIDDLE:
@@ -48,7 +50,10 @@ void SupportTask::tick() {
           LDIST1->switchOff();
           state = WAITING;
        }
-       Serial.println("DISTANCE: " + (String)PROX->getDistance());
+       else {
+          Serial.println("DISTANCE: " + (String)PROX->getDistance());
+          delay(PRINT_DELAY);
+       }
        if (PROX->getDistance()<=DISTMIN) {
         LDIST2->switchOn();
         state = END;
@@ -57,16 +62,19 @@ void SupportTask::tick() {
         LDIST1->switchOff();
         state = ENTERING;
        }
-       delay(500);
        break;
        
     case END:
-        if (!openingRequest || !autoReady || parked) {
+       if (!openingRequest || !autoReady || parked) {
           LDIST1->switchOff();
           LDIST2->switchOff();
           state = WAITING;
        }
-       Serial.println("OK CAN STOP");
+       else {
+          Serial.println("OK CAN STOP");
+          delay(PRINT_DELAY);
+       }
+       
        if (TOUCH->isPressed()) {
           state = TOUCHING;
        }
@@ -74,7 +82,6 @@ void SupportTask::tick() {
         LDIST2->switchOff();
         state = MIDDLE;
        }
-       delay(500);
        break;
 
      case TOUCHING:
@@ -83,11 +90,13 @@ void SupportTask::tick() {
           LDIST2->switchOff();
           state = WAITING;
        }
-       Serial.println("TOUCHING");
+       else {
+          Serial.println("TOUCHING");
+          delay(PRINT_DELAY);
+        }
        if (!(TOUCH->isPressed())) {
           state = END;
        }
-       delay(500);
        break;
     }
 }

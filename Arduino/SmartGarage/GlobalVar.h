@@ -4,6 +4,7 @@
 #define DISTMIN 0.1
 #define DISTMAX 1
 #define DISTCLOSE 0.5
+#define PRINT_DELAY 100
 
 extern bool openingRequest;
 extern bool autoReady;

@@ -1,3 +1,7 @@
+/*
+  This task checks if the user wants to close the garage and if that action is allowed.
+*/
+
 #ifndef __CLOSE_TASK__
 #define __CLOSE_TASK__
 

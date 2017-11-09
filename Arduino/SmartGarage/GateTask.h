@@ -1,3 +1,7 @@
+/*
+  This task checks if the user wants to open the garage and if his car is actually entering.
+*/
+
 #ifndef __GATE_TASK__
 #define __GATE_TASK__
 

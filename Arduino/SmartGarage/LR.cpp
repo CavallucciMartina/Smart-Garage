@@ -1,9 +1,6 @@
 #include "LedLazy.h"
 #include "Arduino.h"
 
-#define MAX_BRIGHTNESS 255
-#define MIN_BRIGHTNESS 0
-
 int brightness;
 int fadeAmount;
 
@@ -19,7 +16,7 @@ void LedLazy::switchOn(){
 	  while (brightness < MAX_BRIGHTNESS){
 		    brightness = brightness+fadeAmount;
 		    analogWrite(pin, brightness);
-		    delay(80);
+		    delay(LED_DELAY);
 	};
 }
 
@@ -27,6 +24,6 @@ void LedLazy::switchOff(){
 	  while (brightness > MIN_BRIGHTNESS) {
 		    brightness = brightness-fadeAmount;
 		    analogWrite(pin, brightness);
-		    delay(80);
+		    delay(LED_DELAY);
 	};
 };
