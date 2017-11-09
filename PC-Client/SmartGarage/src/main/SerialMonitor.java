@@ -8,7 +8,6 @@ import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent; 
 import gnu.io.SerialPortEventListener;
 
-
 /**
  * Simple Serial Monitor, adaptation from: 
  * 
@@ -24,7 +23,7 @@ public class SerialMonitor implements SerialPortEventListener {
 	/**
 	* A BufferedReader which will be fed by a InputStreamReader 
 	* converting the bytes into characters 
-	* making the displayed results codepage independent
+	* making the displayed results codepage independent.
 	*/
 	private DataInputStream input;
 	/** The output stream to the port */
@@ -87,7 +86,6 @@ public class SerialMonitor implements SerialPortEventListener {
 				System.err.println(e.toString());
 			}
 		} 
-		// Ignore all the other eventTypes, but you should consider the other ones.
 	}
 
 	public void sendData(String data) throws IOException {
