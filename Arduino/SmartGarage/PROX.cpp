@@ -17,6 +17,6 @@ float Sonar::getDistance(){
     float tUS = pulseIn(pinEcho, HIGH);
     float t = tUS / 1000.0 / 1000.0 / 2;
     float d = t*vs;
-    return d;  
+    return d > 2 ? 2 : d;
 }
 
