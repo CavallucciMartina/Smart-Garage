@@ -1,10 +1,8 @@
 package main;
+
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.OutputStream;
-
-
 import gnu.io.CommPortIdentifier; 
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEvent; 
@@ -82,6 +80,7 @@ public class SerialMonitor implements SerialPortEventListener {
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
+				@SuppressWarnings("deprecation")
 				String inputLine=input.readLine();
 				monitor.addData(inputLine);
 			} catch (Exception e) {

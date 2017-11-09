@@ -3,10 +3,7 @@ package main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,14 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 public class GarageGui extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JPanel PPC;
 	private JPanel PGarage;
-
 	private JPanel contentaPane;
-	private JLabel labGarage;
-
-	private JPanel panPC;
-	private JPanel panGAR;
+	//private JLabel labGarage;
+	//private JPanel panPC;
+	//private JPanel panGAR;
 	public JButton openButton;
 	public JTextArea gtext;
 
@@ -34,8 +30,8 @@ public class GarageGui extends JFrame {
 		this.PPC = new JPanel();
 		this.PPC.setLayout(new BoxLayout(PPC, 3));
 		this.PGarage = new JPanel();
-		this.panGAR = new JPanel();
-		this.panPC = new JPanel();
+		//this.panGAR = new JPanel();
+		//this.panPC = new JPanel();
 		this.PGarage.setLayout(new BoxLayout(PGarage, 3));
 
 		this.contentaPane.setLayout(new BoxLayout(contentaPane, 3));
