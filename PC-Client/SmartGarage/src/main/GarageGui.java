@@ -99,7 +99,7 @@ public class GarageGui extends JFrame {
 
 		GarageGui monitor = new GarageGui();
 		monitor.serial = new SerialMonitor(monitor);
-		monitor.serial.start("COM5", 9600); /* QUI DA LINEA DI COMANDO LA COMM4 E LA 9600 */
+		monitor.serial.start(args[0], Integer.parseInt(args[1])); /* QUI DA LINEA DI COMANDO LA COMM4 E LA 9600 */
 		
 	}
 
