@@ -26,6 +26,7 @@ void SupportTask::tick() {
     case WAITING:
        if (openingRequest && autoReady && !parked) {
           Serial.println("Welcome Home.");
+          delay(500);
           state = ENTERING;
        }
        break;

@@ -25,10 +25,12 @@ void CloseTask::tick() {
        if (PROX->getDistance()<DISTMIN){
            parked = true;
            Serial.println("OK");
+           delay(500);
            state = WAITING;
        }
        if (PROX->getDistance()>DISTCLOSE){
            Serial.println("TOO FAR");
+           delay(500);
        }
        break;
     }
