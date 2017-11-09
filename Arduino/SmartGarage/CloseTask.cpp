@@ -22,13 +22,16 @@ void CloseTask::tick() {
        break;
        
     case CTRL:
-       if (PROX->getDistance()<DISTMIN){
+       if (!openingRequest || !autoReady || parked) {
+           state = WAITING;
+       }
+       if (PROX->getDistance()<DISTMIN && openingRequest && autoReady && !parked){
            parked = true;
            Serial.println("OK");
            delay(PRINT_DELAY);
            state = WAITING;
        }
-       if (PROX->getDistance()>DISTCLOSE){
+       if (PROX->getDistance()>DISTCLOSE && openingRequest && autoReady && !parked){
            Serial.println("TOO FAR");
            delay(PRINT_DELAY);
        }
