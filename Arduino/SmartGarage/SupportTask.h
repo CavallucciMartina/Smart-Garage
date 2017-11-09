@@ -1,3 +1,7 @@
+/*
+  This task helps the user to parking the car giving him some information.
+*/
+
 #ifndef __SUPPORT_TASK__
 #define __SUPPORT_TASK__
 

@@ -3,6 +3,10 @@
 
 #include "Light.h"
 
+#define MAX_BRIGHTNESS 255
+#define MIN_BRIGHTNESS 0
+#define LED_DELAY 40
+
 class LedLazy: public Light { 
 
   public:
