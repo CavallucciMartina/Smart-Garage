@@ -25,6 +25,7 @@ public class GarageGui extends JFrame {
 	public JButton openButton;
 	public JTextArea gtext;
 	
+	public SerialMonitor serial;
 	public GarageGui(Buffer buf) {
 		this.setTitle("Smart garage");
 		this.contentaPane = new JPanel();
@@ -54,15 +55,26 @@ public class GarageGui extends JFrame {
 		 openButton = new JButton("OPEN");
 		 
 		openButton.setBackground(new Color(0, 137, 123));
+		openButton.addActionListener(e->{
 
-		openButton.addActionListener(new ActionListener() {			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				buf.sendMessage("OPEN");
+			try {
+				serial.sendData('O');
+				
+			} catch (IOException e1) {
+				
+				e1.printStackTrace();
 			}
 		});
 		JButton closeButton = new JButton("CLOSE");
 		closeButton.setBackground(new Color(0, 137, 123));
+		closeButton.addActionListener(e->{
+			try {
+				serial.sendData('S');
+			} catch (IOException e1) {
+			
+				e1.printStackTrace();
+			}
+		});
 		jp.add(openButton);
 		jp.add(closeButton);
 		this.PPC.add(jp);
@@ -81,8 +93,16 @@ public class GarageGui extends JFrame {
 		
 
 	}
-
-	public void updateText(String s) {
-		gtext.append(s);
+	public static void main(String[] args) {
+	
+		GarageGui monitor = new GarageGui();
+		monitor.serial = new SerialMonitor(monitor);
+		monitor.serial.start(args[0], Integer.parseInt(args[1])); /*QUI DA LINEA DI COMANDO LA COMM4 E LA 9600*/
+	}
+	
+	public void addData(String data) {
+		
+		gtext.append(data + '\n');
+		
 	}
 }
