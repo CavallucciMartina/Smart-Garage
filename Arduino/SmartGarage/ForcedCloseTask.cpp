@@ -19,7 +19,7 @@ void ForcedCloseTask::tick() {
     
     case WAITING:
        if ((openingRequest && !autoReady && CLOSE->isPressed()) ||
-          (openingRequest && autoReady && !parked && CLOSE->isPressed() && PROX->getDistance()<=DISTCLOSE)) {
+          (openingRequest && autoReady && !parked && CLOSE->isPressed() && (PROX->getDistance()<=DISTCLOSE || wall))) {
               parked = true;
               openingRequest = false;
               autoReady = false; 

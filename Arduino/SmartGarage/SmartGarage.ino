@@ -22,6 +22,7 @@
 volatile bool openingRequest;
 volatile bool autoReady;
 volatile bool parked;
+volatile bool wall;
 
 /*Tasks instances*/
 Timer timer;

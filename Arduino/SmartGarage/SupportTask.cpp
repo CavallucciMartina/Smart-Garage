@@ -76,6 +76,7 @@ void SupportTask::tick() {
        }
        
        if (TOUCH->isPressed()) {
+          wall = true;
           state = TOUCHING;
        }
        if (PROX->getDistance()>DISTMIN) {
@@ -95,6 +96,7 @@ void SupportTask::tick() {
           delay(PRINT_DELAY);
         }
        if (!(TOUCH->isPressed())) {
+          wall = false;
           state = END;
        }
        break;

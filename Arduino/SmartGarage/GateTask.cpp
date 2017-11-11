@@ -8,6 +8,7 @@ GateTask::GateTask(int pinLR, int pinPIR) {
   openingRequest = false;
   autoReady = false;
   parked = false;
+  wall = false;
 }
 
 void GateTask::init() {
@@ -45,6 +46,7 @@ void GateTask::tick() {
        autoReady = false;
        openingRequest = false;
        parked = false;
+       wall = false;
        LR->switchOff();
        state = WAITING;
        break;
